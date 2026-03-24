@@ -1,5 +1,7 @@
 'use strict'
 
+console.log("HangmanWindow.js loaded")
+
 const words = [
   "Haus", "Baum", "Auto", "Hund", "Katze", "Buch", "Tisch", "Stuhl", "Apfel", "Ball",
   "Fisch", "Vogel", "Blume", "Sonne", "Mond", "Wasser", "Feuer", "Brot", "Milch", "Käse",
