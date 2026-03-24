@@ -8,7 +8,7 @@ const words = [
   "Hand", "Fuß", "Kopf", "Ohr", "Nase", "Auge", "Mund", "Herz", "Schule", "Lehrer",
   "Kind", "Freund", "Spiel", "Tag", "Nacht", "Liebe", "Licht", "Tier", "Zug", "Boot"
 ];
-const alphabet = "abcdefghijklmnopqrstuvwxyzüöä"
+const alphabet = "abcdefghijklmnopqrstuvwxyzüöäasdgasdgasdgasdg"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
 let secretWord = words[Math.floor(Math.random() * words.length)]
