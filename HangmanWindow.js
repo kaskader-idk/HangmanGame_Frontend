@@ -1,6 +1,5 @@
 'use strict'
 
-console.log("HangmanWindow.js loaded")
 
 const words = [
   "Haus", "Baum", "Auto", "Hund", "Katze", "Buch", "Tisch", "Stuhl", "Apfel", "Ball",
@@ -26,6 +25,8 @@ function main(){
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
     drawHangman();
     createRestartButton()
+    console.log("HangmanWindow.js loaded")
+
 }
 //nur ein test bruh
 function createRestartButton(){
