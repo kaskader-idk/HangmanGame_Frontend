@@ -1,6 +1,5 @@
 'use strict'
 
-
 const words = [
   "Haus", "Baum", "Auto", "Hund", "Katze", "Buch", "Tisch", "Stuhl", "Apfel", "Ball",
   "Fisch", "Vogel", "Blume", "Sonne", "Mond", "Wasser", "Feuer", "Brot", "Milch", "Käse",
@@ -25,7 +24,6 @@ function main(){
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
     drawHangman();
     createRestartButton()
-    console.log("test");
 }
 //nur ein test bruh
 function createRestartButton(){
@@ -69,7 +67,8 @@ function createKeyboard(){
     //keyboard [line 1] [letter]
     const keyboard = [
         ["Q","W","E","R","T","Z","U","I","O","P","Ü"],
-        ["A","S","D","F","G","H","J","K","L","Ö","Ä"]
+        ["A","S","D","F","G","H","J","K","L","Ö","Ä"],
+        ["Y","X","C","V","B","N","M"]
     ]
 
     const mainDiv = document.getElementById("KeyboardDiv");
