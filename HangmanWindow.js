@@ -1,11 +1,5 @@
 'use strict'
 
-fetch('https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azurewebsites.net/words')
-  .then(response => response.json())
-  .then(words => console.log(words))
-  .catch(error => console.error('Error:', error));
-
-
 const words = [
   "Haus", "Baum", "Auto", "Hund", "Katze", "Buch", "Tisch", "Stuhl", "Apfel", "Ball",
   "Fisch", "Vogel", "Blume", "Sonne", "Mond", "Wasser", "Feuer", "Brot", "Milch", "Käse",
