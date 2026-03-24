@@ -8,7 +8,7 @@ const words = [
   "Hand", "Fuß", "Kopf", "Ohr", "Nase", "Auge", "Mund", "Herz", "Schule", "Lehrer",
   "Kind", "Freund", "Spiel", "Tag", "Nacht", "Liebe", "Licht", "Tier", "Zug", "Boot"
 ];
-const alphabet = "abcdefghijklmn"
+const alphabet = "abcdefghijklmnopqrstuvwxyzüöä"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
 let secretWord = words[Math.floor(Math.random() * words.length)]
@@ -25,8 +25,7 @@ function main(){
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
     drawHangman();
     createRestartButton()
-    console.log("HangmanWindow.js loaded")
-
+    console.log("test");
 }
 //nur ein test bruh
 function createRestartButton(){
@@ -70,8 +69,7 @@ function createKeyboard(){
     //keyboard [line 1] [letter]
     const keyboard = [
         ["Q","W","E","R","T","Z","U","I","O","P","Ü"],
-        ["A","S","D","F","G","H","J","K","L","Ö","Ä"],
-        ["Y","X","C","V","B","N","M"]
+        ["A","S","D","F","G","H","J","K","L","Ö","Ä"]
     ]
 
     const mainDiv = document.getElementById("KeyboardDiv");
