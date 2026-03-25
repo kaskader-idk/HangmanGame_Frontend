@@ -21,9 +21,11 @@ var backendURL = 'https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azure
 
 function main(){
     console.log("fetch versuch");
-    const test = fetch(`${backendURL}/easy`)
-    .then(wordArray => response.json())
-    console.log(test);
+    fetch(`${backendURL}/easy`)
+    .then(response => response.json())
+    .then(words => console.log(words["words"]))
+    .catch(error => console.error('Error:', error));
+    console.log("fetch versuch ende");
 
     createKeyboard();
     loadFromStorage();
