@@ -23,7 +23,7 @@ function main(){
     console.log("fetch versuch");
     fetch(`${backendURL}/easy`)
     .then(response => response.json())
-    .then(words => console.log(words))
+    .then(words => console.log(words.wort))
     .catch(error => console.error('Error:', error));
     console.log("fetch versuch ende");
 
