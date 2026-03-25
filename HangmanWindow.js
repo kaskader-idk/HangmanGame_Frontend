@@ -21,7 +21,7 @@ var backendURL = 'https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azure
 
 function main(){
     console.log("fetch versuch");
-    fetch(`${backendURL}/words`)
+    fetch(`${backendURL}/easy`)
   .then(response => response.json())
   .then(words => console.log(words))
   .catch(error => console.error('Error:', error));
