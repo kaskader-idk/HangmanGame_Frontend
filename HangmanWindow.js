@@ -16,9 +16,9 @@ canvas.height = 500;
 var stage = 0;
 var backendURL = 'https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azurewebsites.net'
 
-function main(){
+async function main(){
     console.log("fetch versuch");
-    fetch(`${backendURL}/easy`)
+    await fetch(`${backendURL}/easy`)
                 .then(response => response.json())
                 .then(words => console.log(words.wort))
                 .then(words => secretWord = words.wort);
