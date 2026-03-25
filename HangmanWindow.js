@@ -17,14 +17,15 @@ secredWordH1.textContent = secretWord.split("").fill("_").join(" ");
 canvas.width = 500;
 canvas.height = 500;
 var stage = 0;
+var backendURL = 'https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azurewebsites.net'
 
 function main(){
-  //   console.log("fetch versuch");
-  //   fetch('https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azurewebsites.net/words')
-  // .then(response => response.json())
-  // .then(words => console.log(words))
-  // .catch(error => console.error('Error:', error));
-  // console.log("fetch versuch ende");
+    console.log("fetch versuch");
+    fetch(`${backendURL}/words`)
+  .then(response => response.json())
+  .then(words => console.log(words))
+  .catch(error => console.error('Error:', error));
+  console.log("fetch versuch ende");
 
     createKeyboard();
     loadFromStorage();
