@@ -1,12 +1,5 @@
 'use strict'
 
-const words = [
-  "Haus", "Baum", "Auto", "Hund", "Katze", "Buch", "Tisch", "Stuhl", "Apfel", "Ball",
-  "Fisch", "Vogel", "Blume", "Sonne", "Mond", "Wasser", "Feuer", "Brot", "Milch", "Käse",
-  "Stift", "Papier", "Tür", "Fenster", "Straße", "Berg", "See", "Himmel", "Regen", "Wind",
-  "Hand", "Fuß", "Kopf", "Ohr", "Nase", "Auge", "Mund", "Herz", "Schule", "Lehrer",
-  "Kind", "Freund", "Spiel", "Tag", "Nacht", "Liebe", "Licht", "Tier", "Zug", "Boot"
-];
 const alphabet = "abcdefghijklmnopqrstuvwxyzüöä"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
