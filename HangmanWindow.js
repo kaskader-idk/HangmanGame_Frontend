@@ -10,7 +10,9 @@ const words = [
 const alphabet = "abcdefghijklmnopqrstuvwxyzüöä"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
-let secretWord = words[Math.floor(Math.random() * words.length)]
+let secretWord = fetch(`${backendURL}/easy`)
+                .then(response => response.json())
+                .then(words => console.log(words.wort));
 const secredWordH1 = document.getElementById("secretWord");
 const scoreboard = document.getElementById("scoreboardH1");
 secredWordH1.textContent = secretWord.split("").fill("_").join(" ");
@@ -22,9 +24,8 @@ var backendURL = 'https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azure
 function main(){
     console.log("fetch versuch");
     fetch(`${backendURL}/easy`)
-    .then(response => response.json())
-    .then(words => console.log(words.wort))
-    .catch(error => console.error('Error:', error));
+                .then(response => response.json())
+                .then(words => console.log(words.wort));
     console.log("fetch versuch ende");
 
     createKeyboard();
