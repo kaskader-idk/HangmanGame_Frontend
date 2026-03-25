@@ -10,12 +10,7 @@ const words = [
 const alphabet = "abcdefghijklmnopqrstuvwxyzüöä"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
-const secredWordH1 = document.getElementById("secretWord");
-let secretWord = fetch(`${backendURL}/easy`)
-                .then(response => response.json())
-                .then(words => console.log(words.wort))
-                .then(words => secredWordH1.textContent = words.split("").fill("_").join(" "));
-const scoreboard = document.getElementById("scoreboardH1");
+let secretWord;
 canvas.width = 500;
 canvas.height = 500;
 var stage = 0;
@@ -25,7 +20,8 @@ function main(){
     console.log("fetch versuch");
     fetch(`${backendURL}/easy`)
                 .then(response => response.json())
-                .then(words => console.log(words.wort));
+                .then(words => console.log(words.wort))
+                .then(words => secretWord = words.wort);
     console.log("fetch versuch ende");
 
     createKeyboard();
