@@ -44,9 +44,8 @@ html, body{
     align-items: center;
 }
 #letterDiv{
-    
     width: 3vw;
-    height: 50px;
+    height: 3vw;
     display: flex;
     justify-content: center;
     align-items: center;

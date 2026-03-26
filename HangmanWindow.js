@@ -168,7 +168,7 @@ function createKeyboard(){
             letterButton.textContent = letter;
 
             letterButton.id = letter;
-
+            letterButton.style.aspectRatio = "1 / 1";
             letterButton.style.backgroundColor = "lightblue";
             letterButton.style.width = "3vw";
             letterButton.style.height = "50px";
