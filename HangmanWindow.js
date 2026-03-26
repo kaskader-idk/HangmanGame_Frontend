@@ -230,7 +230,7 @@ function checkForLetterInSecretWord(letter){
   }
   if(stage == 6){
     scoreboard.textContent = "Fehler: " + (stage) + " / 6" + " Du hast verloren";
-    secredWordH1.textContent = secretWord.wort;
+    secredWordH1.textContent = secredWord.wort;
   } else if(!secredWordH1.textContent.includes("_")){
     scoreboard.textContent = "Fehler: " + (stage) + " / 6" + " Du hast gewonnen"
     
