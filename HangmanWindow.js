@@ -1,29 +1,39 @@
 'use strict'
 
-const alphabet = "abcdefghijklmnopqrstuvwxyzüöä"
+// const words = [
+//   "Haus", "Baum", "Auto", "Hund", "Katze", "Buch", "Tisch", "Stuhl", "Apfel", "Ball",
+//   "Fisch", "Vogel", "Blume", "Sonne", "Mond", "Wasser", "Feuer", "Brot", "Milch", "Käse",
+//   "Stift", "Papier", "Tür", "Fenster", "Straße", "Berg", "See", "Himmel", "Regen", "Wind",
+//   "Hand", "Fuß", "Kopf", "Ohr", "Nase", "Auge", "Mund", "Herz", "Schule", "Lehrer",
+//   "Kind", "Freund", "Spiel", "Tag", "Nacht", "Liebe", "Licht", "Tier", "Zug", "Boot"
+// ];
+const baseURL = "https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azurewebsites.net"
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÜÖÄ"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
-let secretWord;
+let secredWord;
+const secredWordH1 = document.getElementById("secretWord");
+const scoreboard = document.getElementById("scoreboardH1");
 canvas.width = 500;
 canvas.height = 500;
 var stage = 0;
-var backendURL = 'https://hangmanbackend-f2eqd3cvexbgbchg.polandcentral-01.azurewebsites.net'
 
-async function main(){
-    console.log("fetch versuch");
-    await fetch(`${backendURL}/easy`)
-                .then(response => response.json())
-                .then(words => console.log(words.wort))
-                .then(words => secretWord = words.wort);
-    console.log("fetch versuch ende");
+async function getSecretWord(){
+  secredWord = await fetch(`${baseURL}/easy`).then(response => response.json());
+  console.log(secredWord.wort);
+  secredWordH1.textContent = secredWord.wort.split("").fill("_").join(" ");
+}
 
+
+function main(){
     createKeyboard();
+    getSecretWord();
     loadFromStorage();
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
     drawHangman();
     createRestartButton()
 }
-//nur ein test bruh
+
 function createRestartButton(){
   const button = document.createElement("button");
   button.textContent = "Restart Game";
@@ -33,8 +43,7 @@ function createRestartButton(){
     stage = 0;
     localStorage.setItem("savedKeys", "");
     createKeyboard();
-    secretWord = words[Math.floor(Math.random() * words.length)]
-    secredWordH1.textContent = secretWord.split("").fill("_").join(" ");
+    getSecretWord();
     drawHangman();
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
 
@@ -57,7 +66,7 @@ function loadFromStorage(){
     stage = 0;
     localStorage.setItem("savedKeys", "");
     createKeyboard();
-    secredWordH1.textContent = secretWord.split("").fill("_").join(" ");
+    secredWordH1.textContent = secretWord.wort.split("").fill("_").join(" ");
   } 
 }
 
@@ -105,10 +114,10 @@ function createKeyboard(){
 }
 
 function revealLetter(letter){
-  var splitedWort = secretWord.split("").forEach((element, index) => {
+  var splitedWort = secredWord.wort.split("").forEach((element, index) => {
       if(element.toUpperCase().includes(letter.toUpperCase())){
         var temp = secredWordH1.textContent.split(" ");
-        temp[index] = letter;
+        temp[index] = letter.toUpperCase();
         secredWordH1.textContent = temp.join(" ");
       }
   })
@@ -130,7 +139,7 @@ function checkForLetterInSecretWord(letter){
       }
       
 
-      if(secretWord.toUpperCase().includes(letter.toUpperCase())){
+      if(secredWord.wort.toUpperCase().includes(letter.toUpperCase())){
         revealLetter(letter);
         button.style.backgroundColor = "lightgreen";
       }else{
@@ -145,11 +154,10 @@ function checkForLetterInSecretWord(letter){
     button.disabled = true;
   }
   if(stage == 6){
-    scoreboard.textContent = "Fehler: " + (stage) + " / 6" + " Sie haben verloren";
-    secredWordH1.textContent = secretWord;
-  } 
-  if(!secredWordH1.textContent.includes("_")){
-    scoreboard.textContent = "Fehler: " + (stage) + " / 6" + " Sie haben gewonnen"
+    scoreboard.textContent = "Fehler: " + (stage) + " / 6" + " Du hast verloren";
+    secredWordH1.textContent = secretWord.wort;
+  } else if(!secredWordH1.textContent.includes("_")){
+    scoreboard.textContent = "Fehler: " + (stage) + " / 6" + " Du hast gewonnen"
     
   }
   
@@ -220,7 +228,7 @@ function drawHangman() {
 main();
 
 document.addEventListener("keydown", (event) => {
-    if(alphabet.includes(event.key)){
+    if(alphabet.includes(event.key.toUpperCase())){
      checkForLetterInSecretWord(event.key)
     }
 });
