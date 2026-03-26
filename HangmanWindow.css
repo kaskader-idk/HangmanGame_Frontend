@@ -164,4 +164,14 @@ h2{
     height: 20%;
     width: 100%;
 }
+#restartButton{
+    width: 30vw;
+    height: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    margin: 0.3vw;
+}
+
 }
