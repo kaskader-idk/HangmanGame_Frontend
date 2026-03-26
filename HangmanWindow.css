@@ -16,24 +16,21 @@ html, body{
     display: flex;
 }
 #leftDiv{
-    
-
-    
     height: 100%;
-    width: 40%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #rightDiv{
     height: 100%;
-    width: 60%;
+    width: 70%;
 }
 #guessingWordDiv{
     display: flex;
     align-items: center;
     justify-content: center;
-    height:40%;
+    height:30%;
     width:100%;
 }
 #KeyboardDiv{
@@ -92,6 +89,8 @@ button:disabled {
 
 button {
     transition: filter 0.2s ease, transform 0.2s ease;
+    border: 2px solid black;
+    color: black;
 }
 
 h2{
@@ -101,4 +100,68 @@ h2{
 #hangman{
     width: 100% ;
     height: 80%;
+}
+.keyboardButton{
+    height: 4vw;
+    width: 4vw;
+}
+@media (max-width: 877px) {
+    .keyboardButton{
+    height: 6vw;
+    width: 4vw;
+}
+}
+
+@media (max-width: 768px) {
+    html, body{
+    font-family: Segoe UI, sans-serif;
+    height: 120%;
+    background: linear-gradient(to bottom right, rgb(0, 191, 255), rgb(255, 0, 0));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#main{
+    background: linear-gradient(to bottom right, rgb(135, 255, 255), rgb(169, 255, 176));
+    height: 80%;
+    width: 90vw;
+    border-radius: 30px;
+    display: block;
+}
+#leftDiv{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#rightDiv{
+    height: 50%;
+    width: 100%;
+}
+#KeyboardDiv{
+    display: flex;
+    height: 25%;
+    flex-direction: column;
+    align-items: center;
+}
+#guessingWordDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:10%;
+    width:100%;
+}
+.keyboardButton{
+    height: 6vw;
+    width: 6vw;
+}
+#buttonDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+}
 }
