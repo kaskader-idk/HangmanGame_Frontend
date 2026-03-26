@@ -18,9 +18,7 @@ const scoreboard = document.getElementById("scoreboardH1");
 canvas.width = 500;
 canvas.height = 500;
 var stage = 0;
-
-
-
+let choseLevelButton;
 
 function main(){
     createKeyboard();
@@ -34,10 +32,8 @@ function main(){
 }
 async function getSecretWord(){
   secredWord = await fetch(`${baseURL}/${level}`).then(response => response.json());
-  console.log(secredWord);
   secredWordH1.textContent = secredWord.wort.split("").fill("_").join(" ");
 }
-
 function showLevelSelection(){
   const levelDiv = document.createElement("div");
   levelDiv.id = "levelSelectionDiv";
@@ -77,6 +73,9 @@ function showLevelSelection(){
     button.style.fontSize = "18px";
     button.style.cursor = "pointer";
     button.addEventListener("click", () => {
+      const p = document.getElementById("pContent");
+      console.log(lvl.name);
+      p.innerHTML = lvl.name;
       level = lvl.name;
       document.body.removeChild(levelDiv);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -86,7 +85,11 @@ function showLevelSelection(){
     getSecretWord();
     drawHangman();
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
-
+    try{
+     choseLevelButton.disabled = false;
+    }catch(ex){
+      console.log("alles gut");
+    }
 
     });
     levelDiv.appendChild(button);
@@ -117,7 +120,9 @@ function createChoseLevelButton(){
   button.textContent = "Choose Level";
   button.id = "restartButton";
   button.addEventListener("click", (event) =>{
-        showLevelSelection();
+        button.disabled = true;
+        choseLevelButton = button;
+        showLevelSelection(button);
   })
   document.getElementById("buttonDiv").appendChild(button);
 }
