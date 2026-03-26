@@ -12,6 +12,7 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÜÖÄ"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
 let secredWord;
+let level = "easy";
 const secredWordH1 = document.getElementById("secretWord");
 const scoreboard = document.getElementById("scoreboardH1");
 canvas.width = 500;
@@ -19,14 +20,15 @@ canvas.height = 500;
 var stage = 0;
 
 async function getSecretWord(){
-  secredWord = await fetch(`${baseURL}/easy`).then(response => response.json());
-  console.log(secredWord.wort);
+  secredWord = await fetch(`${baseURL}/${level}`).then(response => response.json());
+  console.log(secredWord);
   secredWordH1.textContent = secredWord.wort.split("").fill("_").join(" ");
 }
 
 
 function main(){
     createKeyboard();
+    ChoseLevel();
     getSecretWord();
     loadFromStorage();
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
@@ -51,6 +53,31 @@ function createRestartButton(){
   })
   document.getElementById("restartButtonDiv").appendChild(button);
 }
+function createChoseLevelButton(){
+  const button = document.createElement("button");
+  button.textContent = "Chose Level";
+  button.id = "choseLevelButton";
+  button.addEventListener("click", (event) =>{
+    ChoseLevel();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stage = 0;
+    localStorage.setItem("savedKeys", "");
+    createKeyboard();
+    getSecretWord();
+    drawHangman();
+    scoreboard.textContent = "Fehler: " + (stage) + " / 6"
+
+
+  })
+  document.getElementById("choseLevelButton").appendChild(button);
+}
+function ChoseLevel(){
+  //easy
+  //medium
+  //hard
+  //sollen in level drinnen sein
+}
+
 
 function loadFromStorage(){
   try{
