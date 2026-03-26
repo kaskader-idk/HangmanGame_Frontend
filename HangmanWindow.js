@@ -12,26 +12,87 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÜÖÄ"
 const canvas = document.getElementById("hangman");
 const ctx = canvas.getContext("2d");
 let secredWord;
+let level = "easy";
 const secredWordH1 = document.getElementById("secretWord");
 const scoreboard = document.getElementById("scoreboardH1");
 canvas.width = 500;
 canvas.height = 500;
 var stage = 0;
 
-async function getSecretWord(){
-  secredWord = await fetch(`${baseURL}/easy`).then(response => response.json());
-  console.log(secredWord.wort);
-  secredWordH1.textContent = secredWord.wort.split("").fill("_").join(" ");
-}
+
 
 
 function main(){
     createKeyboard();
+    showLevelSelection();
     getSecretWord();
     loadFromStorage();
     scoreboard.textContent = "Fehler: " + (stage) + " / 6"
     drawHangman();
     createRestartButton()
+    createChoseLevelButton();
+}
+async function getSecretWord(){
+  secredWord = await fetch(`${baseURL}/${level}`).then(response => response.json());
+  console.log(secredWord);
+  secredWordH1.textContent = secredWord.wort.split("").fill("_").join(" ");
+}
+
+function showLevelSelection(){
+  const levelDiv = document.createElement("div");
+  levelDiv.id = "levelSelectionDiv";
+  levelDiv.style.display = "flex";
+  levelDiv.style.flexDirection = "column";
+  levelDiv.style.alignItems = "center";
+  levelDiv.style.justifyContent = "center";
+  levelDiv.style.position = "absolute";
+  levelDiv.style.top = "50%";
+  levelDiv.style.left = "50%";
+  levelDiv.style.transform = "translate(-50%, -50%)";
+  levelDiv.style.backgroundColor = "white";
+  levelDiv.style.borderRadius = "20px";
+  levelDiv.style.padding = "20px";
+  levelDiv.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+  levelDiv.style.zIndex = "10";
+
+  const title = document.createElement("h2");
+  title.textContent = "Wähle die Schwierigkeit";
+  levelDiv.appendChild(title);
+
+  const levels = [
+    { name: "easy", color: "lightgreen", label: "Leicht" },
+    { name: "medium", color: "yellow", label: "Mittel" },
+    { name: "hard", color: "lightcoral", label: "Schwer" }
+  ];
+
+  levels.forEach(lvl => {
+    const button = document.createElement("button");
+    button.textContent = lvl.label;
+    button.style.backgroundColor = lvl.color;
+    button.style.width = "150px";
+    button.style.height = "50px";
+    button.style.margin = "10px";
+    button.style.borderRadius = "10px";
+    button.style.border = "none";
+    button.style.fontSize = "18px";
+    button.style.cursor = "pointer";
+    button.addEventListener("click", () => {
+      level = lvl.name;
+      document.body.removeChild(levelDiv);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stage = 0;
+    localStorage.setItem("savedKeys", "");
+    createKeyboard();
+    getSecretWord();
+    drawHangman();
+    scoreboard.textContent = "Fehler: " + (stage) + " / 6"
+
+
+    });
+    levelDiv.appendChild(button);
+  });
+
+  document.body.appendChild(levelDiv);
 }
 
 function createRestartButton(){
@@ -49,7 +110,16 @@ function createRestartButton(){
 
 
   })
-  document.getElementById("restartButtonDiv").appendChild(button);
+  document.getElementById("buttonDiv").appendChild(button);
+}
+function createChoseLevelButton(){
+  const button = document.createElement("button");
+  button.textContent = "Choose Level";
+  button.id = "restartButton";
+  button.addEventListener("click", (event) =>{
+        showLevelSelection();
+  })
+  document.getElementById("buttonDiv").appendChild(button);
 }
 
 function loadFromStorage(){

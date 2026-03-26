@@ -57,7 +57,7 @@ html, body{
     justify-content: center;
     align-items: center;
 }
-#restartButtonDiv{
+#buttonDiv{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,4 +72,12 @@ html, body{
     align-items: center;
     border-radius: 15px;
     margin: 0.3vw;
+}
+
+button:hover {
+    filter: brightness(0.7);
+}
+
+button:active {
+    filter: brightness(0.5);
 }
